@@ -1,23 +1,25 @@
 package com.biz.wage;
 
 public class EmployeeWageBuilder {
-    static final int IS_FULL_TIME = 1;
-    static final int IS_PART_TIME = 2;
-    static final int EMP_RATE_PER_HOUR = 20;
-    public static final int NUM_OF_WORKING_DAYS = 20;
-    static int empHrs = 0;
-    static int empWage = 0;
-    static int totalEmpWage = 0;
+    public static final int IS_FULL_TIME = 1;
+    public static final int IS_PART_TIME = 2;
+    public static final int EMP_RATE_PER_HOUR = 20;
+    public static  int MAX_WORKING_DAYS=20;
+    public static final int Max_WORKING_HRS = 100;
 
-    public static void main(String[] args) {
-
+    public static void main( String[] args ) {
+        // Variables
         int empHrs = 0;
         int empWage = 0;
-        int totalEmpWage = 0;
-        //computation
-        for (int day = 0; day < NUM_OF_WORKING_DAYS; day++) {
-            int empCheck = (int) Math.floor(Math.random() * 10) % 4;
-            switch (empCheck) {
+        int totalWage = 0;
+        int totalWorkingHrs = 0;
+        int totalWorkingDays = 0;
+        while (totalWorkingHrs <= Max_WORKING_HRS && totalWorkingHrs < MAX_WORKING_DAYS) {
+            totalWorkingDays++;
+
+            //computation
+            double empCheck = (int) Math.floor(Math.random() * 10) % 3;
+            switch ((int) empCheck) {
                 case IS_FULL_TIME:
                     empHrs = 8;
                     break;
@@ -28,12 +30,15 @@ public class EmployeeWageBuilder {
                     empHrs = 0;
 
             }
+            totalWorkingHrs += empHrs;
 
             empWage = empHrs * EMP_RATE_PER_HOUR;
-            totalEmpWage = totalEmpWage + empWage;
-            System.out.println("Emp Wage: " + empWage);
+            System.out.println("Employee Wage :" + empWage);
+            totalWage += empWage;
+
+            System.out.println("Total Working Hours: " + totalWorkingHrs);
+            System.out.println("Total Employee Wage for 20 days:" + totalWage);
         }
-        System.out.println("Total Emp Wage for 20 days:" + totalEmpWage);
     }
 }
 
